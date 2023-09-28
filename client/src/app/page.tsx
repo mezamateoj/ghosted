@@ -4,8 +4,8 @@ import { Terminal } from 'lucide-react';
 
 export default function Home() {
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<h1>Hello</h1>
-		</main>
+		<div className="flex mt-5 items-center flex-col">
+			<h1 className="font-bold text-4xl">Ghosted</h1>
+		</div>
 	);
 }
