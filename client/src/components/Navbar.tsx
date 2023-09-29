@@ -3,9 +3,9 @@ import React from 'react';
 
 export default function Navbar() {
 	return (
-		<header className="border-b-2 h-16 sm:h-20 flex justify-between items-center p-4 sm:px-16">
+		<header className="h-16 sm:h-20 flex justify-between items-center p-4 sm:px-16">
 			<Link href={'/'}>
-				<p className=" text-l sm:text-2xl font-medium">
+				<p className="text-l sm:text-2xl font-medium">
 					<span className="hidden sm:inline-block">👻</span>Ghosted.
 				</p>
 			</Link>
