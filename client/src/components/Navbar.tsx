@@ -4,6 +4,7 @@ import React from 'react';
 
 import { useUser } from '@clerk/nextjs';
 import { UserButton } from '@clerk/nextjs';
+import ClerkButtons from './ClerkButtons';
 
 export default function Navbar() {
 	const { isSignedIn } = useUser();
@@ -20,6 +21,9 @@ export default function Navbar() {
 					<Link href={'/jobs'} className="hover:text-sky-500">
 						Jobs
 					</Link>
+					<Link href={'/create-job'} className="hover:text-sky-500">
+						Create Job
+					</Link>
 					<Link href={'/stats'} className="hover:text-sky-500 px-3">
 						Stats
 					</Link>
@@ -29,21 +33,7 @@ export default function Navbar() {
 						<UserButton afterSignOutUrl="/" />
 					</div>
 				) : (
-					<>
-						<div className="hidden sm:block border-2 h-6"></div>
-						<div className="ml-2 gap-2">
-							<Link href={'/sign-in'}>
-								<button className="hidden sm:inline-block rounded-md hover:text-sky-500 duration-200  text-slate-200 p-2">
-									Sign in
-								</button>
-							</Link>
-							<Link href={'/sign-up'}>
-								<button className="hidden sm:inline-block rounded-md p-2 border-2 hover:bg-white hover:text-black duration-200">
-									Sign up
-								</button>
-							</Link>
-						</div>
-					</>
+					<ClerkButtons />
 				)}
 			</nav>
 		</header>

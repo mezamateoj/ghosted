@@ -1,5 +1,6 @@
 import MainLanding from '@/components/MainLanding';
 import { MoveRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
 	return (
@@ -16,9 +17,12 @@ export default function Home() {
 					clear record of every job you apply for.
 				</p>
 
-				<button className="flex gap-2 items-center rounded-md bg-red-700 p-2 sm:font-medium">
+				<Link
+					href={'/create'}
+					className="flex gap-2 items-center rounded-md bg-green-500 px-4 py-3 sm:font-medium"
+				>
 					Start now <MoveRight size={20} />
-				</button>
+				</Link>
 			</div>
 			<MainLanding />
 		</div>
