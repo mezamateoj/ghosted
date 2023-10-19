@@ -22,15 +22,18 @@ model User {
 
 model Jobs {
   id        Int   @id @default(autoincrement())
-  title     String
-  location  String
+  title     String 
+  location  String?
   status    Status  @default(APPLIED)
   company   String
+  url       String
+  date      DateTime
   user      User    @relation(fields: [userId], references: [id])
   userId    Int   @unique
 }
 
 enum Status {
+  READY
   APPLIED
   INTERVIEW
   REJECTED
