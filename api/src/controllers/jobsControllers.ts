@@ -5,11 +5,11 @@ const prisma = new PrismaClient();
 
 // GET /api/jobs/:userId/all
 const getAllJobs = async (req: Request, res: Response) => {
-	const { userId } = req.params;
+	const { clerkId } = req.params;
 	try {
 		const jobs = await prisma.jobs.findMany({
 			where: {
-				userId: userId,
+				clerkId,
 			},
 		});
 		res.status(200).json(jobs);
@@ -20,7 +20,7 @@ const getAllJobs = async (req: Request, res: Response) => {
 
 // POST /api/jobs/:userId/create
 const createJob = async (req: Request, res: Response) => {
-	const { userId } = req.params;
+	const { clerkId } = req.params;
 	const { title, description, location, status, company } = req.body;
 	try {
 		const newJob = await prisma.jobs.create({
@@ -30,7 +30,7 @@ const createJob = async (req: Request, res: Response) => {
 				location,
 				status,
 				company,
-				userId: userId,
+				clerkId,
 			},
 		});
 		res.status(201).json(newJob);
@@ -39,4 +39,38 @@ const createJob = async (req: Request, res: Response) => {
 	}
 };
 
-export { createJob, getAllJobs };
+// PUT /api/jobs/:id/update
+const updateStatus = async (req: Request, res: Response) => {
+	const { id } = req.params;
+	const { status } = req.body;
+	try {
+		const updatedJob = await prisma.jobs.update({
+			where: {
+				id: parseInt(id),
+			},
+			data: {
+				status,
+			},
+		});
+		res.status(200).json(updatedJob);
+	} catch (error: any) {
+		res.status(500).json({ error: error.message });
+	}
+};
+
+// DELETE /api/jobs/:id/delete
+const deleteJob = async (req: Request, res: Response) => {
+	const { id } = req.params;
+	try {
+		await prisma.jobs.delete({
+			where: {
+				id: parseInt(id),
+			},
+		});
+		res.status(200).json({ message: 'Job deleted' });
+	} catch (error: any) {
+		res.status(500).json({ error: error.message });
+	}
+};
+
+export { createJob, getAllJobs, updateStatus, deleteJob };

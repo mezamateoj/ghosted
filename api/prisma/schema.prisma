@@ -30,8 +30,8 @@ model Jobs {
   company   String
   url       String?
   createdAt DateTime @default(now())
-  userId    String   @unique
-  user      User    @relation(fields: [userId], references: [clerkId])
+  clerkId    String 
+  user      User    @relation(fields: [clerkId], references: [clerkId])
 }
 
 enum Status {
