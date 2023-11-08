@@ -15,32 +15,42 @@ import { toast } from 'sonner';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Payment = {
+export type Job = {
 	id: string;
-	amount: number;
-	status: 'pending' | 'processing' | 'success' | 'failed';
-	email: string;
+	title: string;
+	status:
+		| 'APPLIED'
+		| 'INTERVIEW'
+		| 'REJECTED'
+		| 'GHOSTED'
+		| 'OFFER'
+		| 'READY';
+	location: string;
+	description: string;
+	company: string;
+	url: string;
+	clerkId: string;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Job>[] = [
+	{
+		accessorKey: 'id',
+		header: 'Job id',
+	},
 	{
 		accessorKey: 'company',
 		header: 'Company',
-	},
-	{
-		accessorKey: 'position',
-		header: 'Position',
 	},
 	{
 		accessorKey: 'status',
 		header: 'Status',
 	},
 	{
-		accessorKey: 'jobUrl',
+		accessorKey: 'url',
 		header: 'Url',
 	},
 	{
-		accessorKey: 'email',
+		accessorKey: 'title',
 		header: ({ column }) => {
 			return (
 				<Button
@@ -49,7 +59,7 @@ export const columns: ColumnDef<Payment>[] = [
 						column.toggleSorting(column.getIsSorted() === 'asc')
 					}
 				>
-					Email
+					Title
 					<ArrowUpDown className="ml-2 h-4 w-4" />
 				</Button>
 			);
