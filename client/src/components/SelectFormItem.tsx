@@ -22,10 +22,11 @@ export default function SelectFormItem({ field }: { field: any }) {
 				</SelectTrigger>
 			</FormControl>
 			<SelectContent>
-				<SelectItem value="sent">Sent</SelectItem>
-				<SelectItem value="ready">Ready to apply</SelectItem>
-				<SelectItem value="applied">Applied</SelectItem>
-				<SelectItem value="rejected">Rejected</SelectItem>
+				<SelectItem value="READY">Ready to applied</SelectItem>
+				<SelectItem value="APPLIED">Applied</SelectItem>
+				<SelectItem value="INTERVIEW">Interview</SelectItem>
+				<SelectItem value="REJECTED">Rejected</SelectItem>
+				<SelectItem value="GHOSTED">Ghosted</SelectItem>
 			</SelectContent>
 		</Select>
 	);

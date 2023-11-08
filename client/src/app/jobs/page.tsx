@@ -1,24 +1,17 @@
-import { Payment, columns } from './columns';
+import { Job, columns } from './columns';
 import { DataTable } from './data-table';
-import data from './data';
 
-async function getData(): Promise<Payment[]> {
+async function getData(): Promise<Job[]> {
 	// Fetch data from your API here.
-	// return [
-	// 	{
-	// 		id: '728ed52f',
-	// 		amount: 100,
-	// 		status: 'pending',
-	// 		email: 'm@example.com',
-	// 	},
-	// 	// ...
-	// ];
+	const res = await fetch(
+		'http://localhost:3001/api/jobs/user_2XsKOHv32DrfNlRjffVXAkDMDfD/all'
+	);
+	const data = await res.json();
 	return data;
 }
 
 export default async function DemoPage() {
 	const data = await getData();
-
 	return (
 		<div className="container mx-auto py-10 w-5/6">
 			<DataTable columns={columns} data={data} />

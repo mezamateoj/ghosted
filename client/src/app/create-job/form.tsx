@@ -31,18 +31,10 @@ const formSchema = z.object({
 		.regex(/^[ A-Za-z0-9,_@./#&+-]*$/, {
 			message: 'Position must be alphanumeric',
 		}),
+	title: z.string().min(2, { message: 'Please add the job title' }),
 	jobUrl: z.string(),
 	status: z.string({ required_error: 'Please select an application status' }),
-	date: z.date({
-		required_error: 'Please select a date of birth',
-	}),
 });
-
-// const formData = {
-//     {
-//         name: ''
-//     }
-// }
 
 export default function JobForm() {
 	// define form
@@ -52,15 +44,17 @@ export default function JobForm() {
 			company: '',
 			position: '',
 			jobUrl: '',
+			title: '',
+			status: '',
 		},
 	});
 
 	// define submit handler
-
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		console.log(values);
 		// reset form to default values
 		toast.success('Job application submitted successfully!');
+		form.reset();
 	}
 
 	return (
@@ -84,6 +78,13 @@ export default function JobForm() {
 						</FormItem>
 					)}
 				/>
+				<FormItems
+					name="title"
+					label="Title"
+					placeholder="Job title"
+					control={form.control}
+				/>
+
 				<FormItems
 					name="position"
 					label="Position"
@@ -112,7 +113,7 @@ export default function JobForm() {
 					)}
 				/>
 				{/* select date */}
-				<FormField
+				{/* <FormField
 					control={form.control}
 					name="date"
 					render={({ field }) => (
@@ -124,7 +125,7 @@ export default function JobForm() {
 							<FormMessage />
 						</FormItem>
 					)}
-				/>
+				/> */}
 				<Button type="submit">Submit</Button>
 			</form>
 		</Form>
