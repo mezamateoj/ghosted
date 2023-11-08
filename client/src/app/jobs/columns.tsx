@@ -97,19 +97,19 @@ export const columns: ColumnDef<Job>[] = [
 						<DropdownMenuLabel>Actions</DropdownMenuLabel>
 						<DropdownMenuItem
 							onClick={() => {
+								goTo(job.id);
+							}}
+						>
+							View Job
+						</DropdownMenuItem>
+						<DropdownMenuSeparator />
+						<DropdownMenuItem
+							onClick={() => {
 								deleteJob(job.id);
 								toast.success('Job deleted successfully!');
 							}}
 						>
 							Delete Job
-						</DropdownMenuItem>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem
-							onClick={() => {
-								goTo(job.id);
-							}}
-						>
-							View Job
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

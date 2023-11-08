@@ -13,8 +13,11 @@ export async function getJobsData(): Promise<Job[]> {
 	const { userId } = auth();
 	// Fetch data from your API here.
 	const res = await fetch(`http://localhost:3001/api/jobs/${userId}/all`);
-	const data = await res.json();
-	return data;
+
+	if (!res.ok) {
+		throw new Error('Failed to fetch jobs');
+	}
+	return res.json();
 }
 
 export async function createJob(values: jobForm) {
@@ -60,25 +63,41 @@ export async function deleteJob(id: string) {
 }
 
 // GET /api/jobs/:clerkId/:id
-export async function getJobById(id: string) {
+export async function getJobById(id: string): Promise<Job[]> {
 	const { userId } = auth();
 
-	if (userId) {
-		const res = await fetch(
-			`http://localhost:3001/api/jobs/${userId}/${id}`,
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}
-		);
+	const res = await fetch(`http://localhost:3001/api/jobs/${userId}/${id}`);
 
-		const data = await res.json();
-		return data;
-	} else {
-		return {
-			message: 'Something went wrong, failed to delete job.',
-		};
+	if (!res.ok) {
+		throw new Error('Failed to fetch job');
 	}
+
+	return res.json();
+}
+
+interface updateStatus {
+	status: string;
+	title: string;
+	description: string;
+}
+
+// PUT /api/jobs/update/:clerkId/:id
+export async function updateJob(id: string, values: updateStatus) {
+	const { userId } = auth();
+	const res = await fetch(
+		`http://localhost:3001/api/jobs/update/${userId}/${id}`,
+		{
+			method: 'PUT',
+			body: JSON.stringify(values),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+
+	if (!res.ok) {
+		throw new Error('Failed to update job');
+	}
+
+	redirect('/jobs');
 }
