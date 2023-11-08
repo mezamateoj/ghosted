@@ -18,10 +18,27 @@ const getAllJobs = async (req: Request, res: Response) => {
 	}
 };
 
+// GET /api/jobs/:userId/:id
+const getJobById = async (req: Request, res: Response) => {
+	const { id } = req.params;
+	const { clerkId } = req.params;
+	try {
+		const jobs = await prisma.jobs.findMany({
+			where: {
+				clerkId,
+				id: parseInt(id),
+			},
+		});
+		res.status(200).json(jobs);
+	} catch (error: any) {
+		res.status(500).json({ error: error.message });
+	}
+};
+
 // POST /api/jobs/:userId/create
 const createJob = async (req: Request, res: Response) => {
 	const { clerkId } = req.params;
-	const { title, description, location, status, company } = req.body;
+	const { title, description, location, status, company, url } = req.body;
 	try {
 		const newJob = await prisma.jobs.create({
 			data: {
@@ -30,6 +47,7 @@ const createJob = async (req: Request, res: Response) => {
 				location,
 				status,
 				company,
+				url,
 				clerkId,
 			},
 		});
@@ -61,16 +79,31 @@ const updateStatus = async (req: Request, res: Response) => {
 // DELETE /api/jobs/:id/delete
 const deleteJob = async (req: Request, res: Response) => {
 	const { id } = req.params;
+	const { clerkId } = req.body;
 	try {
-		await prisma.jobs.delete({
+		const job = await prisma.jobs.findFirst({
 			where: {
 				id: parseInt(id),
+				clerkId,
 			},
 		});
+
+		if (!job)
+			throw new Error(
+				'Job not found or you are not authorized to delete this job'
+			);
+
+		if (job) {
+			await prisma.jobs.delete({
+				where: {
+					id: job.id,
+				},
+			});
+		}
 		res.status(200).json({ message: 'Job deleted' });
 	} catch (error: any) {
 		res.status(500).json({ error: error.message });
 	}
 };
 
-export { createJob, getAllJobs, updateStatus, deleteJob };
+export { createJob, getAllJobs, updateStatus, deleteJob, getJobById };

@@ -3,9 +3,9 @@ import React from 'react';
 
 export default function loading() {
 	return (
-		<div className="loading">
-			<div className="animate-spin">
-				<LoaderIcon size={64} />
+		<div className="h-screen mt-9">
+			<div className="flex items-center justify-center">
+				<LoaderIcon size={64} className="animate-spin" />
 			</div>
 		</div>
 	);

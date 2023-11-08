@@ -12,25 +12,12 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
+import { Job } from '../lib/definitions';
+import { deleteJob, goTo } from '../lib/actions';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-// This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Job = {
-	id: string;
-	title: string;
-	status:
-		| 'APPLIED'
-		| 'INTERVIEW'
-		| 'REJECTED'
-		| 'GHOSTED'
-		| 'OFFER'
-		| 'READY';
-	location: string;
-	description: string;
-	company: string;
-	url: string;
-	clerkId: string;
-};
 
 export const columns: ColumnDef<Job>[] = [
 	{
@@ -47,7 +34,19 @@ export const columns: ColumnDef<Job>[] = [
 	},
 	{
 		accessorKey: 'url',
-		header: 'Url',
+		header: () => <div className="text-center">Job Post URL</div>,
+		cell: ({ row }) => {
+			return (
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					href={row.getValue('url')}
+					className="text-sm truncate max-w-[160px] line-clamp-1 hover:underline cursor-pointer"
+				>
+					{row.getValue('url')}
+				</a>
+			);
+		},
 	},
 	{
 		accessorKey: 'title',
@@ -81,7 +80,7 @@ export const columns: ColumnDef<Job>[] = [
 	{
 		id: 'actions',
 		cell: ({ row }) => {
-			const payment = row.original;
+			const job = row.original;
 
 			return (
 				<DropdownMenu>
@@ -98,16 +97,19 @@ export const columns: ColumnDef<Job>[] = [
 						<DropdownMenuLabel>Actions</DropdownMenuLabel>
 						<DropdownMenuItem
 							onClick={() => {
-								navigator.clipboard.writeText(payment.id);
-								toast.success('Copied payment ID to clipboard');
+								deleteJob(job.id);
+								toast.success('Job deleted successfully!');
 							}}
 						>
-							Copy payment ID
+							Delete Job
 						</DropdownMenuItem>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem>View customer</DropdownMenuItem>
-						<DropdownMenuItem>
-							View payment details
+						<DropdownMenuItem
+							onClick={() => {
+								goTo(job.id);
+							}}
+						>
+							View Job
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
