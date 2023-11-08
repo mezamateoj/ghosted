@@ -74,3 +74,30 @@ export async function getJobById(id: string): Promise<Job[]> {
 
 	return res.json();
 }
+
+interface updateStatus {
+	status: string;
+	title: string;
+	description: string;
+}
+
+// PUT /api/jobs/update/:clerkId/:id
+export async function updateJob(id: string, values: updateStatus) {
+	const { userId } = auth();
+	const res = await fetch(
+		`http://localhost:3001/api/jobs/update/${userId}/${id}`,
+		{
+			method: 'PUT',
+			body: JSON.stringify(values),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+
+	if (!res.ok) {
+		throw new Error('Failed to update job');
+	}
+
+	redirect('/jobs');
+}

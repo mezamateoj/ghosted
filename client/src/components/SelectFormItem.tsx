@@ -17,7 +17,7 @@ export default function SelectFormItem({ field }: { field: any }) {
 				<SelectTrigger>
 					<SelectValue
 						className="text-black"
-						placeholder="Select the application status"
+						placeholder="Application status"
 					/>
 				</SelectTrigger>
 			</FormControl>
