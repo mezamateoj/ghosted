@@ -17,6 +17,8 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import FormDatePicker from '@/components/FormDatePicker';
+import { createJob } from '../lib/actions';
+import { useState } from 'react';
 
 const formSchema = z.object({
 	company: z
@@ -32,18 +34,19 @@ const formSchema = z.object({
 			message: 'Position must be alphanumeric',
 		}),
 	title: z.string().min(2, { message: 'Please add the job title' }),
-	jobUrl: z.string(),
+	url: z.string(),
 	status: z.string({ required_error: 'Please select an application status' }),
 });
 
 export default function JobForm() {
+	const [loading, setLoading] = useState(false);
 	// define form
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			company: '',
 			position: '',
-			jobUrl: '',
+			url: '',
 			title: '',
 			status: '',
 		},
@@ -51,10 +54,13 @@ export default function JobForm() {
 
 	// define submit handler
 	function onSubmit(values: z.infer<typeof formSchema>) {
+		setLoading(true);
 		console.log(values);
-		// reset form to default values
+		createJob(values);
 		toast.success('Job application submitted successfully!');
+		// reset form to default values
 		form.reset();
+		setLoading(false);
 	}
 
 	return (
@@ -93,7 +99,7 @@ export default function JobForm() {
 				/>
 
 				<FormItems
-					name="jobUrl"
+					name="url"
 					label="Posting URL"
 					placeholder="Job URL"
 					control={form.control}
@@ -126,7 +132,9 @@ export default function JobForm() {
 						</FormItem>
 					)}
 				/> */}
-				<Button type="submit">Submit</Button>
+				<Button disabled={loading} type="submit">
+					Submit
+				</Button>
 			</form>
 		</Form>
 	);
