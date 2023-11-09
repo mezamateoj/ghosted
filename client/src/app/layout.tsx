@@ -25,11 +25,15 @@ export default function RootLayout({
 }) {
 	return (
 		<ClerkProvider>
-			<html lang="en">
+			<html lang="en" suppressHydrationWarning>
 				<body
 					className={`${ibmPlexMono.className} grid grid-rows-[auto_1fr_auto] h-screen`}
 				>
-					<ThemeProvider attribute="class" defaultTheme="dark">
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="dark"
+						disableTransitionOnChange
+					>
 						<Navbar />
 						{children}
 						<Footer />

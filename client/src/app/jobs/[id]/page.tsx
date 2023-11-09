@@ -11,8 +11,9 @@ export default async function page({ params }: { params: { id: string } }) {
 
 	return (
 		<div>
-			<div className="px-6 py-5">
+			<div className="px-6 py-5 flex justify-around">
 				<Back />
+				<JobEdit id={params.id} />
 			</div>
 			<div className="flex items-center mt-5 px-6 py-5 flex-col max-w-4xl ml-auto mr-auto">
 				<div>
@@ -26,10 +27,12 @@ export default async function page({ params }: { params: { id: string } }) {
 					<Separator orientation="vertical" />
 					<p className="truncate max-w-[230px]">{job.url}</p>
 				</div>
-				<div className="mt-5">
+				<div className="mt-5 px-6 py-5">
+					<h3 className="text-xl font-semibold text-center">
+						Job Comments
+					</h3>
 					<p>{job.description || 'Add a comment to the job...'}</p>
 				</div>
-				<JobEdit id={params.id} />
 			</div>
 		</div>
 	);

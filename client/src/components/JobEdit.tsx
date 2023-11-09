@@ -16,21 +16,48 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { Textarea } from './ui/textarea';
 import { SelectStatus } from './SelectStatus';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-const initialValues = {
-	title: '',
-	status: '',
-	description: '',
-};
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select';
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from '@/components/ui/form';
+import SelectFormItem from './SelectFormItem';
+
+const formSchema = z.object({
+	url: z.string().url().optional(),
+	status: z.string().min(2, { message: 'Please select a status' }),
+	description: z.string(),
+});
 
 export function JobEdit({ id }: { id: string }) {
-	const [values, setValues] = useState(initialValues);
+	const form = useForm<z.infer<typeof formSchema>>({
+		resolver: zodResolver(formSchema),
+		defaultValues: {
+			url: '',
+			status: '',
+			description: '',
+		},
+	});
 
-	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault();
+	function onSubmit(values: z.infer<typeof formSchema>) {
 		updateJob(id, values);
-		setValues(initialValues);
 		toast.success('Job updated!');
+		form.reset();
 	}
 
 	return (
@@ -46,53 +73,71 @@ export function JobEdit({ id }: { id: string }) {
 						done.
 					</DialogDescription>
 				</DialogHeader>
-				<form onSubmit={handleSubmit}>
-					<div className="grid gap-4 py-4">
-						<div className="grid grid-cols-4 items-center gap-4">
-							<Label htmlFor="name" className="text-right">
-								Title
-							</Label>
-							<Input
-								id="title"
-								className="col-span-3"
-								value={values.title}
-								onChange={(e) =>
-									setValues({
-										...values,
-										title: e.target.value,
-									})
-								}
-							/>
-						</div>
-						<div className="grid grid-cols-4 items-center gap-4">
-							<Label htmlFor="status" className="text-right">
-								Status
-							</Label>
-							<SelectStatus
-								onChange={(value: string) =>
-									setValues({
-										...values,
-										status: value,
-									})
-								}
+				<Form {...form}>
+					<form
+						onSubmit={form.handleSubmit(onSubmit)}
+						className="flex flex-col space-y-3 justify-center"
+					>
+						<FormField
+							control={form.control}
+							name="url"
+							render={({ field }) => (
+								<FormItem className="">
+									<FormLabel className="text-right">
+										Job URL
+									</FormLabel>
+									<FormControl>
+										<Input
+											className="col-span-3"
+											placeholder="https://www.google.com"
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+
+						<div className="">
+							<FormField
+								control={form.control}
+								name="status"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel className="text-white">
+											Application Status
+										</FormLabel>
+										<SelectFormItem field={field} />
+										<FormMessage />
+									</FormItem>
+								)}
 							/>
 						</div>
 						<div>
-							<Textarea
-								onChange={(e) =>
-									setValues({
-										...values,
-										description: e.target.value,
-									})
-								}
-								placeholder="Add a comment for the job."
+							<FormField
+								control={form.control}
+								name="description"
+								render={({ field }) => (
+									<FormItem className="">
+										<FormLabel className="">
+											Description
+										</FormLabel>
+										<FormControl>
+											<Textarea {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
 							/>
 						</div>
-					</div>
-					<DialogFooter>
-						<Button type="submit">Save changes</Button>
-					</DialogFooter>
-				</form>
+
+						<DialogFooter>
+							<Button className="mt-1" type="submit">
+								Save changes
+							</Button>
+						</DialogFooter>
+					</form>
+				</Form>
 			</DialogContent>
 		</Dialog>
 	);
