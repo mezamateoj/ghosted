@@ -77,7 +77,7 @@ export async function getJobById(id: string): Promise<Job[]> {
 
 interface updateStatus {
 	status: string;
-	url: string;
+	url?: string | undefined;
 	description: string;
 }
 
