@@ -58,9 +58,9 @@ const createJob = async (req: Request, res: Response) => {
 };
 
 // PUT /api/jobs/update/:clerkId/:id
-const updateStatus = async (req: Request, res: Response) => {
+const updateJob = async (req: Request, res: Response) => {
 	const { id, clerkId } = req.params;
-	const { status, title, description } = req.body;
+	const { status, url, description } = req.body;
 	try {
 		const job = await prisma.jobs.findFirst({
 			where: {
@@ -69,19 +69,32 @@ const updateStatus = async (req: Request, res: Response) => {
 			},
 		});
 
+		// Construct the data object conditionally
+		const dataToUpdate: { [key: string]: any } = {};
+
 		if (!job)
 			throw new Error(
 				'Job not found or you are not authorized to update this job'
 			);
+
+		if (url !== '') {
+			dataToUpdate.url = url;
+		}
+
+		if (description !== '') {
+			dataToUpdate.description = description;
+		}
+
+		if (typeof status !== 'undefined') {
+			dataToUpdate.status = status;
+		}
 
 		const updatedJob = await prisma.jobs.update({
 			where: {
 				id: job.id,
 			},
 			data: {
-				status,
-				title,
-				description,
+				...dataToUpdate,
 			},
 		});
 		res.status(200).json(updatedJob);
@@ -120,4 +133,4 @@ const deleteJob = async (req: Request, res: Response) => {
 	}
 };
 
-export { createJob, getAllJobs, updateStatus, deleteJob, getJobById };
+export { createJob, getAllJobs, updateJob, deleteJob, getJobById };

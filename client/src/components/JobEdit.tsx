@@ -18,7 +18,7 @@ import { Textarea } from './ui/textarea';
 import { SelectStatus } from './SelectStatus';
 
 const initialValues = {
-	title: '',
+	url: '',
 	status: '',
 	description: '',
 };
@@ -32,6 +32,8 @@ export function JobEdit({ id }: { id: string }) {
 		setValues(initialValues);
 		toast.success('Job updated!');
 	}
+
+	console.log(values);
 
 	return (
 		<Dialog>
@@ -49,17 +51,17 @@ export function JobEdit({ id }: { id: string }) {
 				<form onSubmit={handleSubmit}>
 					<div className="grid gap-4 py-4">
 						<div className="grid grid-cols-4 items-center gap-4">
-							<Label htmlFor="name" className="text-right">
-								Title
+							<Label htmlFor="url" className="text-right">
+								Job URL
 							</Label>
 							<Input
-								id="title"
+								id="url"
 								className="col-span-3"
-								value={values.title}
+								value={values.url}
 								onChange={(e) =>
 									setValues({
 										...values,
-										title: e.target.value,
+										url: e.target.value,
 									})
 								}
 							/>

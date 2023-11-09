@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>({
 							.getColumn('status')
 							?.setFilterValue(event.target.value)
 					}
-					className="max-w-sm text-black"
+					className="max-w-sm "
 				/>
 			</div>
 			<div className="rounded-md border">
@@ -123,7 +123,7 @@ export function DataTable<TData, TValue>({
 			</div>
 			<div className="flex items-center justify-end space-x-2 py-4">
 				<Button
-					className="text-black"
+					className=""
 					variant="outline"
 					size="sm"
 					onClick={() => table.previousPage()}
@@ -132,7 +132,7 @@ export function DataTable<TData, TValue>({
 					Previous
 				</Button>
 				<Button
-					className="text-black"
+					className=""
 					variant="outline"
 					size="sm"
 					onClick={() => table.nextPage()}
