@@ -5,9 +5,6 @@ import { Job, jobForm } from './definitions';
 import { redirect } from 'next/navigation';
 import { auth } from '@clerk/nextjs';
 
-// const SERVER_URL = 'http://localhost:3001';
-const SERVER_URL = 'http://ec2-3-94-195-6.compute-1.amazonaws.com';
-
 export async function goTo(id: string) {
 	redirect(`/jobs/${id}`);
 }
@@ -15,7 +12,7 @@ export async function goTo(id: string) {
 export async function getJobsData(): Promise<Job[]> {
 	const { userId } = auth();
 	// Fetch data from your API here.
-	const res = await fetch(`${SERVER_URL}/api/jobs/${userId}/all`);
+	const res = await fetch(`${process.env.SERVER_URL}/api/jobs/${userId}/all`);
 
 	if (!res.ok) {
 		throw new Error('Failed to fetch jobs');
@@ -27,7 +24,7 @@ export async function createJob(values: jobForm) {
 	const { userId } = auth();
 
 	if (userId) {
-		await fetch(`${SERVER_URL}/api/jobs/${userId}/create`, {
+		await fetch(`${process.env.SERVER_URL}/api/jobs/${userId}/create`, {
 			method: 'POST',
 			body: JSON.stringify(values),
 			headers: {
@@ -49,7 +46,7 @@ export async function deleteJob(id: string) {
 	const { userId } = auth();
 
 	if (userId) {
-		await fetch(`http://localhost:3001/api/jobs/${id}/delete`, {
+		await fetch(`${process.env.SERVER_URL}/api/jobs/${id}/delete`, {
 			method: 'DELETE',
 			body: JSON.stringify({ clerkId: userId }),
 			headers: {
@@ -69,7 +66,9 @@ export async function deleteJob(id: string) {
 export async function getJobById(id: string): Promise<Job[]> {
 	const { userId } = auth();
 
-	const res = await fetch(`http://localhost:3001/api/jobs/${userId}/${id}`);
+	const res = await fetch(
+		`${process.env.SERVER_URL}/api/jobs/${userId}/${id}`
+	);
 
 	if (!res.ok) {
 		throw new Error('Failed to fetch job');
@@ -88,7 +87,7 @@ interface updateStatus {
 export async function updateJob(id: string, values: updateStatus) {
 	const { userId } = auth();
 	const res = await fetch(
-		`http://localhost:3001/api/jobs/update/${userId}/${id}`,
+		`${process.env.SERVER_URL}/api/jobs/update/${userId}/${id}`,
 		{
 			method: 'PUT',
 			body: JSON.stringify(values),
