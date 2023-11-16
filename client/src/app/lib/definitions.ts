@@ -24,3 +24,9 @@ export type jobForm = {
 	url: string;
 	status: string;
 };
+
+export type User = {
+	clerkId: string;
+	email: string;
+	name: string;
+};

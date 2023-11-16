@@ -1,24 +1,44 @@
-// import { Request, Response } from 'express';
-// import { PrismaClient } from '@prisma/client';
+import { Request, Response } from 'express';
+import { PrismaClient } from '@prisma/client';
 
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
-// const getAllUsers = async (req: Request, res: Response) => {
-// 	const users = await prisma.user.findMany();
-// 	res.json(users);
-// };
+const getAllUsers = async (req: Request, res: Response) => {
+	const users = await prisma.user.findMany();
+	res.json(users);
+};
 
-// const createUser = async (req: Request, res: Response) => {
-// 	const { name, email, password } = req.body;
-// 	const user = await prisma.user.create({
-// 		data: {
-// 			name,
-// 			email,
-// 			password,
-// 		},
-// 	});
-// 	res.json(user);
-// };
+const createUser = async (req: Request, res: Response) => {
+	const { name, email, clerkId } = req.body;
+	console.log(name, email, clerkId);
+
+	try {
+		const findUser = await prisma.user.findUnique({
+			where: {
+				clerkId: clerkId,
+			},
+		});
+
+		console.log(findUser);
+
+		if (!findUser) {
+			const user = await prisma.user.create({
+				data: {
+					name,
+					email,
+					clerkId,
+				},
+			});
+
+			res.status(200).json(user);
+		} else {
+			res.status(200).json(findUser);
+		}
+	} catch (error: any) {
+		console.log(error.message);
+		res.status(500).json({ message: error.message });
+	}
+};
 
 // const deleteUser = async (req: Request, res: Response) => {
 // 	try {
@@ -36,4 +56,4 @@
 // 	}
 // };
 
-// export { getAllUsers, createUser, deleteUser };
+export { getAllUsers, createUser };
