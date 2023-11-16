@@ -57,7 +57,7 @@ export default function JobForm() {
 		setLoading(true);
 		console.log(values);
 		createJob(values);
-		toast.success('Job application submitted successfully!');
+		toast.success('Job creation submitted successfully!');
 		// reset form to default values
 		form.reset();
 		setLoading(false);
