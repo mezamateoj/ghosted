@@ -5,6 +5,9 @@ import { Job, jobForm } from './definitions';
 import { redirect } from 'next/navigation';
 import { auth } from '@clerk/nextjs';
 
+// const SERVER_URL = 'http://localhost:3001';
+const SERVER_URL = 'http://ec2-3-94-195-6.compute-1.amazonaws.com';
+
 export async function goTo(id: string) {
 	redirect(`/jobs/${id}`);
 }
@@ -12,7 +15,7 @@ export async function goTo(id: string) {
 export async function getJobsData(): Promise<Job[]> {
 	const { userId } = auth();
 	// Fetch data from your API here.
-	const res = await fetch(`http://localhost:3001/api/jobs/${userId}/all`);
+	const res = await fetch(`${SERVER_URL}/api/jobs/${userId}/all`);
 
 	if (!res.ok) {
 		throw new Error('Failed to fetch jobs');
@@ -24,7 +27,7 @@ export async function createJob(values: jobForm) {
 	const { userId } = auth();
 
 	if (userId) {
-		await fetch(`http://localhost:3001/api/jobs/${userId}/create`, {
+		await fetch(`${SERVER_URL}/api/jobs/${userId}/create`, {
 			method: 'POST',
 			body: JSON.stringify(values),
 			headers: {

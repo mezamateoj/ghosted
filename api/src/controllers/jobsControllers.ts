@@ -12,8 +12,13 @@ const getAllJobs = async (req: Request, res: Response) => {
 				clerkId,
 			},
 		});
+		console.log(jobs);
+		if (!jobs) {
+			return res.status(200).json({ message: 'No jobs created yet!' });
+		}
 		res.status(200).json(jobs);
 	} catch (error: any) {
+		console.log(error.message);
 		res.status(500).json({ error: error.message });
 	}
 };
