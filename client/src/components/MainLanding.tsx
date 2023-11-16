@@ -1,6 +1,9 @@
+import { getUserCreate } from '@/app/lib/actions';
 import React from 'react';
 
-export default function MainLanding() {
+export default async function MainLanding() {
+	await getUserCreate();
+
 	return (
 		<div className="mt-10 flex items-center flex-col p-5 max-w-[400px] text-center gap-4">
 			<h2 className=" text-xl sm:text-2xl font-semibold">

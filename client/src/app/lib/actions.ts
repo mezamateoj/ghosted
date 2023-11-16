@@ -4,6 +4,31 @@ import { revalidatePath } from 'next/cache';
 import { Job, jobForm } from './definitions';
 import { redirect } from 'next/navigation';
 import { auth } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs';
+
+export async function getUserCreate() {
+	const user = await currentUser();
+	const email = user?.emailAddresses[0].emailAddress;
+	const userName = user?.username || null;
+
+	if (user) {
+		await fetch(`${process.env.SERVER_URL}/api/users`, {
+			method: 'POST',
+			body: JSON.stringify({
+				name: userName,
+				email: email,
+				clerkId: user?.id,
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+	} else {
+		return {
+			message: 'No user on the client.',
+		};
+	}
+}
 
 export async function goTo(id: string) {
 	redirect(`/jobs/${id}`);
