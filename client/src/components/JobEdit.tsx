@@ -28,7 +28,7 @@ import {
 import SelectFormItem from './SelectFormItem';
 
 const formSchema = z.object({
-	url: z.string().url().optional(),
+	url: z.string().url().optional().or(z.literal('')),
 	status: z.string().min(2, { message: 'Please select a status' }),
 	description: z.string(),
 });

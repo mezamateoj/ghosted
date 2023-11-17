@@ -127,4 +127,5 @@ export async function updateJob(id: string, values: updateStatus) {
 	}
 
 	redirect('/jobs');
+	// revalidatePath(`/jobs/[id]`);
 }

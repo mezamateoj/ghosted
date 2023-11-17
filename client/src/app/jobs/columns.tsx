@@ -16,6 +16,7 @@ import { Job } from '../lib/definitions';
 import { deleteJob, goTo } from '../lib/actions';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 // You can use a Zod schema here if you want.
 
@@ -31,6 +32,21 @@ export const columns: ColumnDef<Job>[] = [
 	{
 		accessorKey: 'status',
 		header: 'Status',
+		cell: ({ row }) => {
+			return (
+				<p
+					className={cn('rounded-md text-green-400', {
+						'text-red-500': row.getValue('status') === 'REJECTED',
+						'text-blue-400': row.getValue('status') === 'READY',
+					})}
+				>
+					{row.getValue('status')}
+				</p>
+			);
+		},
+		filterFn: (row, id, value) => {
+			return value.includes(row.getValue(id));
+		},
 	},
 	{
 		accessorKey: 'url',

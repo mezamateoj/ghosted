@@ -3,6 +3,7 @@ import CardJobCreation from '@/components/CardJobCreation';
 import MagicLink from '@/components/MagicLink';
 import Link from 'next/link';
 import React from 'react';
+import { toast } from 'sonner';
 
 export default function page() {
 	return (
@@ -29,9 +30,9 @@ export default function page() {
 				<CardJobCreation
 					description="Create the your new job in one-click."
 					type="magic"
-					btnText="🪄 Create"
+					btnText="🚧"
 					onClick={() => {
-						console.log('click');
+						toast.error('Hey im working on it, check back later..');
 					}}
 				/>
 				<CardJobCreation
