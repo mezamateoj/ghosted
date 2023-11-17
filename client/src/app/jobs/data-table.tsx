@@ -22,6 +22,10 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PlusIcon } from 'lucide-react';
+import Link from 'next/link';
+import { DataTableFacetedFilter } from '@/components/DataTableFacetedFilter';
+import { statuses } from '@/lib/utils';
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
@@ -52,21 +56,33 @@ export function DataTable<TData, TValue>({
 
 	return (
 		<div>
-			<div className="flex items-center py-4">
+			<div className="flex items-center py-4 gap-8">
 				<Input
-					placeholder="Filter Status..."
+					placeholder="Search Company..."
 					value={
 						(table
-							.getColumn('status')
+							.getColumn('company')
 							?.getFilterValue() as string) ?? ''
 					}
 					onChange={(event) =>
 						table
-							.getColumn('status')
+							.getColumn('company')
 							?.setFilterValue(event.target.value)
 					}
-					className="max-w-sm "
+					className="max-w-sm"
 				/>
+				{table.getColumn('status') && (
+					<DataTableFacetedFilter
+						column={table.getColumn('status')}
+						title="Status"
+						options={statuses}
+					/>
+				)}
+				<Button className="ml-auto">
+					<Link href={'/create-job'}>
+						<PlusIcon />
+					</Link>
+				</Button>
 			</div>
 			<div className="rounded-md border">
 				<Table>

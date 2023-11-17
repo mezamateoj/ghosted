@@ -13,3 +13,30 @@ export function formatDate(input: string | number): string {
 		year: 'numeric',
 	});
 }
+
+export const statuses = [
+	{
+		value: 'APPLIED',
+		label: 'Applied',
+	},
+	{
+		value: 'INTERVIEW',
+		label: 'Interview',
+	},
+	{
+		value: 'REJECTED',
+		label: 'Rejected',
+	},
+	{
+		value: 'GHOSTED',
+		label: 'Ghosted',
+	},
+	{
+		value: 'OFFER',
+		label: 'Offer',
+	},
+	{
+		value: 'READY',
+		label: 'Ready to applied',
+	},
+];

@@ -45,8 +45,11 @@ export default function CardJobCreation({
 					<form>
 						<div className="grid w-full items-center gap-4">
 							<div className="flex flex-col space-y-1.5">
-								<Label htmlFor="name">URL</Label>
-								<Input id="name" placeholder="Paste job URL" />
+								{/* <Label htmlFor="name">URL</Label>
+								<Input id="name" placeholder="Paste job URL" /> */}
+								<h1 className="font-bold text-xl">
+									Currently under development 🏗️ 🚧
+								</h1>
 							</div>
 						</div>
 					</form>
