@@ -126,6 +126,6 @@ export async function updateJob(id: string, values: updateStatus) {
 		throw new Error('Failed to update job');
 	}
 
-	redirect('/jobs');
-	// revalidatePath(`/jobs/[id]`);
+	// redirect('/jobs');
+	revalidatePath(`/jobs/${[id]}`);
 }

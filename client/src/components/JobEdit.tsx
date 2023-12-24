@@ -3,6 +3,7 @@ import { updateJob } from '@/app/lib/actions';
 import { Button } from '@/components/ui/button';
 import {
 	Dialog,
+	DialogClose,
 	DialogContent,
 	DialogDescription,
 	DialogFooter,
@@ -45,6 +46,7 @@ export function JobEdit({ id }: { id: string }) {
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		updateJob(id, values);
+
 		toast.success('Job updated!');
 		form.reset();
 	}
