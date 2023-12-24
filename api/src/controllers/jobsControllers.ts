@@ -11,8 +11,10 @@ const getAllJobs = async (req: Request, res: Response) => {
 			where: {
 				clerkId,
 			},
+			orderBy: {
+				id: 'desc',
+			},
 		});
-		console.log(jobs);
 		if (!jobs) {
 			return res.status(200).json({ message: 'No jobs created yet!' });
 		}
@@ -132,6 +134,25 @@ const deleteJob = async (req: Request, res: Response) => {
 				},
 			});
 		}
+		res.status(200).json({ message: 'Job deleted' });
+	} catch (error: any) {
+		res.status(500).json({ error: error.message });
+	}
+};
+
+// GET /api/jobs/stats
+const jobStats = async (req: Request, res: Response) => {
+	const { clerkId } = req.body;
+	try {
+		const jobs = await prisma.jobs.aggregate({
+			where: {
+				clerkId,
+			},
+			_count: {
+				id: true,
+			},
+		});
+
 		res.status(200).json({ message: 'Job deleted' });
 	} catch (error: any) {
 		res.status(500).json({ error: error.message });
