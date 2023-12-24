@@ -10,16 +10,12 @@ const getAllUsers = async (req: Request, res: Response) => {
 
 const createUser = async (req: Request, res: Response) => {
 	const { name, email, clerkId } = req.body;
-	console.log(name, email, clerkId);
-
 	try {
 		const findUser = await prisma.user.findUnique({
 			where: {
 				clerkId: clerkId,
 			},
 		});
-
-		console.log(findUser);
 
 		if (!findUser) {
 			const user = await prisma.user.create({

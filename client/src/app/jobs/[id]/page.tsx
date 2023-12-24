@@ -25,10 +25,17 @@ export default async function page({ params }: { params: { id: string } }) {
 					<Separator orientation="vertical" />
 					<p>{job.status}</p>
 					<Separator orientation="vertical" />
-					<p className="truncate max-w-[230px]">{job.url}</p>
+					<a
+						href={job.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="truncate max-w-[300px] hover:underline hover:underline-offset-2"
+					>
+						{job.url}
+					</a>
 				</div>
 				<div className="mt-5 px-6 py-5">
-					<h3 className="text-xl font-semibold text-center">
+					<h3 className="text-xl font-semibold text-center mb-3">
 						Job Comments
 					</h3>
 					<p>{job.description || 'Add a comment to the job...'}</p>
