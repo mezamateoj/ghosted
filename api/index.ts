@@ -8,9 +8,7 @@ import jobsRoutes from './src/routes/jobsRoutes';
 import userClerkWebHook from './src/webhooks/users';
 import userRoutes from './src/routes/userRoutes';
 
-const port = process.env.PORT || 8000;
-
-const app: Application = express();
+export const app: Application = express();
 
 app.use(express.json());
 app.use(morgan('dev'));
@@ -24,6 +22,3 @@ app.use('/api/client', userClerkWebHook);
 app.use('/api/users', userRoutes);
 app.use('/api/jobs', jobsRoutes);
 
-app.listen(port, () => {
-	console.log(`Server v5 is listening`);
-});
