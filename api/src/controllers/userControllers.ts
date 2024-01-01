@@ -4,8 +4,13 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const getAllUsers = async (req: Request, res: Response) => {
-	const users = await prisma.user.findMany();
-	res.json(users);
+	try {
+		const users = await prisma.user.findMany();
+		res.status(200).json(users);
+		
+	} catch (error) {
+		res.status(500).json({ message: 'Could not find users' });
+	}
 };
 
 const createUser = async (req: Request, res: Response) => {
