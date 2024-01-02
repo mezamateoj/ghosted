@@ -3,7 +3,7 @@ import { app } from '../../../index'
 import { describe } from 'node:test'
 import { PrismaClient } from '@prisma/client'
 
-const JOBS_ROUTE = '/api/jobs'
+const JOBS_ROUTE = '/api/stats'
 const prisma = new PrismaClient();
 
 
@@ -17,13 +17,15 @@ afterAll(async () => {
 })
 
 
-describe('Jobs controllers /api/jobs', () => {
+describe('Jobs controllers /api/stats', () => {
 
-    test('wrong clerk Id responds with 404', async () => {
-        const response = await request(app).get(`${JOBS_ROUTE}/1/all`)
-        expect(response.status).toBe(404)
+    test('Get all jobs statuses counts', async () => {
+        const response = await request(app)
+            .get(`${JOBS_ROUTE}/counts`)
+            .send({jobStatus: 'READY'})
+        expect(response.status).toBe(200)
         expect(response.header['content-type']).toMatch(/json/)
-        expect(response.body).toHaveProperty('message');
+        expect(response.body[0]).toHaveProperty('status');
                 
     })
 })
