@@ -7,6 +7,7 @@ dotenv.config();
 import jobsRoutes from './src/routes/jobsRoutes';
 import userClerkWebHook from './src/webhooks/users';
 import userRoutes from './src/routes/userRoutes';
+import statsRoutes from './src/routes/statsRoutes';
 
 export const app: Application = express();
 
@@ -21,4 +22,5 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/client', userClerkWebHook);
 app.use('/api/users', userRoutes);
 app.use('/api/jobs', jobsRoutes);
+app.use('/api/stats', statsRoutes);	
 
