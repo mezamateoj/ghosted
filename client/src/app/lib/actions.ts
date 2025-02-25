@@ -91,9 +91,12 @@ export async function deleteJob(id: string) {
 export async function getJobById(id: string): Promise<Job[]> {
 	const { userId } = auth();
 
+	console.log(userId)
 	const res = await fetch(
 		`${process.env.SERVER_URL}/api/jobs/${userId}/${id}`
 	);
+
+
 
 	if (!res.ok) {
 		throw new Error('Failed to fetch job');
