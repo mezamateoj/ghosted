@@ -6,19 +6,15 @@ const prisma = new PrismaClient();
 
 const userClerkWebHook = async (req: Request, res: Response) => {
 	try {
-		console.log('here works');
-
 		const payloadString = JSON.stringify(req.body);
 		const svixHeaders = req.headers;
 
 		const wh = new Webhook(process.env.CLERK_WEBHOOK_SECRET!);
-		console.log('here works 2');
 		// @ts-ignore: Unreachable code error
 		const evt = wh.verify(payloadString, svixHeaders);
 		console.log('here works 3');
 		// @ts-ignore: Unreachable code error
 		const { id, ...attributes } = evt.data;
-		console.log('here works 4');
 		// Handle the webhooks
 		// @ts-ignore: Unreachable code error
 		const eventType = evt.type;
