@@ -7,6 +7,8 @@ import Footer from '@/components/Footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from 'sonner';
 import { ClerkProvider } from '@clerk/nextjs';
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { AppSidebar } from '@/components/app-sidebar';
 // const inter = Inter({ subsets: ['latin'] });
 const ibmPlexMono = IBM_Plex_Mono({
 	subsets: ['latin'],
@@ -27,17 +29,23 @@ export default function RootLayout({
 		<ClerkProvider>
 			<html lang="en" suppressHydrationWarning>
 				<body
-					className={`${ibmPlexMono.className} grid grid-rows-[auto_1fr_auto] h-screen`}
+					className={`${ibmPlexMono.className}`}
 				>
+
 					<ThemeProvider
 						attribute="class"
 						defaultTheme="dark"
 						disableTransitionOnChange
 					>
-						<Navbar />
-						{children}
-						<Footer />
-						<Toaster position="top-center" />
+				
+
+				
+							<main className='w-full'>
+					
+								{children}
+								<Toaster position="top-center" />
+							</main>
+						
 					</ThemeProvider>
 				</body>
 			</html>

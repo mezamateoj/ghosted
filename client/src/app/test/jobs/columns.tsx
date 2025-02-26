@@ -12,8 +12,8 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
-import { Job } from '../lib/definitions';
-import { deleteJob, goTo } from '../lib/actions';
+import { Job } from '../../lib/definitions';
+import { deleteJob, goTo } from '../../lib/actions';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';

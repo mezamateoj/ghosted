@@ -11,11 +11,7 @@ export default function ClerkButtons() {
 						Sign in
 					</button>
 				</Link>
-				<Link href={'/sign-up'}>
-					<button className="hidden sm:inline-block rounded-md p-2 border-2 hover:bg-white hover:text-black duration-200">
-						Sign up
-					</button>
-				</Link>
+
 			</div>
 		</>
 	);

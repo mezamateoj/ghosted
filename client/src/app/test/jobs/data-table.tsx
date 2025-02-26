@@ -79,7 +79,7 @@ export function DataTable<TData, TValue>({
 					/>
 				)}
 				<Button className="ml-auto">
-					<Link href={'/create-job'}>
+					<Link href={'/test/create-job'}>
 						<PlusIcon />
 					</Link>
 				</Button>

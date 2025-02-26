@@ -1,4 +1,4 @@
-import { getJobsData } from '../lib/actions';
+import { getJobsData } from '../../lib/actions';
 import { columns } from './columns';
 import { DataTable } from './data-table';
 
