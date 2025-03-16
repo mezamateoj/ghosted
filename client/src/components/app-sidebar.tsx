@@ -24,8 +24,8 @@ const items = [
     icon: Inbox,
   },
   {
-    title: "Calendar",
-    url: "#",
+    title: "Add Job",
+    url: "/ghosted/create-job",
     icon: Calendar,
   },
   {

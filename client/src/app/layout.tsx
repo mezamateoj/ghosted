@@ -31,20 +31,16 @@ export default function RootLayout({
 				<body
 					className={`${ibmPlexMono.className}`}
 				>
-
 					<ThemeProvider
 						attribute="class"
-						defaultTheme="dark"
+						defaultTheme="light"
 						disableTransitionOnChange
 					>
+						<main className='w-full'>
 				
-
-				
-							<main className='w-full'>
-					
-								{children}
-								<Toaster position="top-center" />
-							</main>
+							{children}
+							<Toaster position="top-center" />
+						</main>
 						
 					</ThemeProvider>
 				</body>
