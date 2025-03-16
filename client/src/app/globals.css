@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import 'tailwindcss';
 
 :root  {
 	--background: 82.7 65% 95%;
