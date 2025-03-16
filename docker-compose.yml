@@ -24,6 +24,8 @@ services:
         volumes:
         - ./client/src:/app/src
         - ./client/public:/app/public
+        env_file:
+        - ./client/.env.local
         restart: always
         ports:
         - 3000:3000

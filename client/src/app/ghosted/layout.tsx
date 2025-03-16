@@ -10,16 +10,13 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-
-
-						<SidebarProvider>
-							<AppSidebar />
-							<main className='w-full'>
-							<SidebarTrigger />
-								{children}
-								<Toaster position="top-center" />
-							</main>
-						</SidebarProvider>
-
+	<SidebarProvider>
+		<AppSidebar />
+		<main className='w-full'>
+		<SidebarTrigger />
+			{children}
+			<Toaster position="top-center" />
+		</main>
+	</SidebarProvider>
 	);
 }
