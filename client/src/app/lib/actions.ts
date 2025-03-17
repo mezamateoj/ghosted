@@ -31,7 +31,7 @@ export async function getUserCreate() {
 }
 
 export async function goTo(id: string) {
-	redirect(`/jobs/${id}`);
+	redirect(`jobs/${id}`);
 }
 
 export async function getJobsData(): Promise<Job[]> {

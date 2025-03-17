@@ -14,11 +14,6 @@ import {
 // Menu items.
 const items = [
   {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
-  {
     title: "Jobs",
     url: "jobs",
     icon: Inbox,
@@ -28,24 +23,14 @@ const items = [
     url: "/ghosted/create-job",
     icon: Calendar,
   },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
 ]
 
 export function AppSidebar() {
   return (
-    <Sidebar>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+    <Sidebar className="bg-orange-600 border-orange-800 rounded-tr-3xl">
+      <SidebarContent className="">
+        <SidebarGroup className="">
+          <SidebarGroupLabel className="mb-2 underline">Ghosted</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (

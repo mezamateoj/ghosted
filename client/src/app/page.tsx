@@ -20,10 +20,10 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center space-x-6">
             <nav className="hidden md:flex space-x-6">
-              <Link href="#features" className="text-sm hover:text-emerald-400 transition-colors">
+              <Link href="#features" className="text-sm hover:text-orange-400 transition-colors">
                 Features
               </Link>
-              <Link href="#how-it-works" className="text-sm hover:text-emerald-400 transition-colors">
+              <Link href="#how-it-works" className="text-sm hover:text-orange-400 transition-colors">
                 How it works
               </Link>
             </nav>
@@ -42,7 +42,7 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4">
         <div className="container mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-emerald-500 text-transparent bg-clip-text md:h-20">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-orange-500 text-transparent bg-clip-text md:h-20">
             Never Get Ghosted Again
           </h1>
           <p className="text-xl md:text-2xl text-gray-400 mb-8 max-w-2xl mx-auto">
@@ -50,8 +50,8 @@ export default function LandingPage() {
             assistant.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-emerald-500 hover:bg-emerald-600">
-				<Link href="/test/jobs" className="flex flex-row items-center">
+            <Button size="lg" className="bg-orange-500 hover:bg-orange-600">
+				<Link href="/ghosted/jobs" className="flex flex-row items-center">
               		Start now <ArrowRight className="ml-2 h-4 w-4" />
 				</Link>
             </Button>
@@ -67,32 +67,32 @@ export default function LandingPage() {
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <FeatureCard
-              icon={<Briefcase className="h-6 w-6 text-emerald-500" />}
+              icon={<Briefcase className="h-6 w-6 text-orange-500" />}
               title="Smart Job Tracking"
               description="Automatically organize and track all your job applications in one place."
             />
             <FeatureCard
-              icon={<Brain className="h-6 w-6 text-emerald-500" />}
+              icon={<Brain className="h-6 w-6 text-orange-500" />}
               title="AI-Powered Insights"
               description="Get personalized recommendations and interview preparation tips."
             />
             <FeatureCard
-              icon={<Bell className="h-6 w-6 text-emerald-500" />}
+              icon={<Bell className="h-6 w-6 text-orange-500" />}
               title="Smart Reminders"
               description="Never miss a deadline with intelligent follow-up reminders."
             />
             <FeatureCard
-              icon={<ClipboardList className="h-6 w-6 text-emerald-500" />}
+              icon={<ClipboardList className="h-6 w-6 text-orange-500" />}
               title="Application Analytics"
               description="Track your success rates and identify improvement areas."
             />
             <FeatureCard
-              icon={<Calendar className="h-6 w-6 text-emerald-500" />}
+              icon={<Calendar className="h-6 w-6 text-orange-500" />}
               title="Interview Management"
               description="Schedule and prepare for interviews with integrated calendar."
             />
             <FeatureCard
-              icon={<MessageSquare className="h-6 w-6 text-emerald-500" />}
+              icon={<MessageSquare className="h-6 w-6 text-orange-500" />}
               title="Network Management"
               description="Keep track of all your professional connections and interactions."
             />
@@ -125,13 +125,13 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-b from-black to-emerald-950">
+      <section className="py-24 bg-gradient-to-b from-black to-orange-950">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to streamline your job search?</h2>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Join thousands of job seekers who've already simplified their job hunt with Ghosted.
           </p>
-          <Button size="lg" className="bg-emerald-500 hover:bg-emerald-600">
+          <Button size="lg" className="bg-orange-500 hover:bg-orange-600">
             Get started for free <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
@@ -264,7 +264,7 @@ function Step({
 }) {
   return (
     <div className="text-center">
-      <div className="w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center text-xl font-bold mx-auto mb-4">
+      <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-xl font-bold mx-auto mb-4">
         {number}
       </div>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
