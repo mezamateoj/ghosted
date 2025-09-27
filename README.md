@@ -4,10 +4,7 @@
 
 ## A minimalistic job application tracker.
 
-The Server is contanerized and deploy on fly.io.
-
 TODO:
--The magic url is in work using web crawlers
-
-
-![Ghosted APP](/Ghosted.png)
+- Finish server migration.
+- Update client.
+- The magic url is in work using web crawlers
