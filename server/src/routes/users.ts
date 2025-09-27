@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { db, usersTable } from "../db";
 import z from "zod";
+import { eq } from "drizzle-orm";
 
 const app = new Hono();
 
@@ -23,6 +24,28 @@ app.post("/", async (c) => {
   await db.insert(usersTable).values(user);
   return c.json({ message: "User created", user }, 201);
 });
-app.get("/:id", (c) => c.json(`get ${c.req.param("id")}`));
+
+const idSchema = z.string().transform((val) => {
+  const parsed = parseInt(val, 10);
+  if (isNaN(parsed)) {
+    throw new Error("Invalid ID");
+  }
+  return parsed;
+});
+
+app.get("/:id", async (c) => {
+  const id = await idSchema.parseAsync(c.req.param("id"));
+  console.log(`Fetching user with id ${id}`);
+  const user = await db.select().from(usersTable).where(eq(usersTable.id, id));
+
+  return c.json(
+    {
+      user,
+      message: "User found",
+      status: "success",
+    },
+    200,
+  );
+});
 
 export default app;
