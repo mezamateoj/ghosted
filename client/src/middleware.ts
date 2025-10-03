@@ -1,10 +1,14 @@
-import { authMiddleware } from '@clerk/nextjs';
+import { betterAuth } from "better-auth";
 
-export default authMiddleware({
-	publicRoutes: ['/', '/pages', '/home'],
+export const auth = betterAuth({
+  //...other options
+  emailAndPassword: {
+    enabled: true,
+  },
+  socialProviders: {
+    github: {
+      clientId: process.env.GITHUB_CLIENT_ID as string,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+    },
+  },
 });
-
-
-export const config = {
-	matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
-};
