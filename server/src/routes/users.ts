@@ -21,7 +21,7 @@ app.post("/", async (c) => {
   console.log(body);
   const user = await userSchema.parseAsync(body);
 
-  await db.insert(user).values(user);
+  await db.insert(usersTable).values(user);
   return c.json({ message: "User created", user }, 201);
 });
 
