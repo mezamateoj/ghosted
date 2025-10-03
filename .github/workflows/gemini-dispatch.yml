@@ -97,18 +97,9 @@ jobs:
               core.setOutput('command', 'review');
               const additionalContext = request.replace(/^@gemini-cli \/review/, '').trim();
               core.setOutput('additional_context', additionalContext);
-            } else if (request.startsWith("@gemini-cli")) {
-              core.setOutput('command', 'invoke');
-              const additionalContext = request.replace(/^@gemini-cli/, '').trim();
-              core.setOutput('additional_context', additionalContext);
-            } else if (eventType === 'pull_request.opened') {
+            }  else if (eventType === 'pull_request.opened') {
               core.setOutput('command', 'review');
-            } else if (['issues.opened', 'issues.reopened'].includes(eventType)) {
-              core.setOutput('command', 'triage');
-            } else {
-              core.setOutput('command', 'fallthrough');
             }
-
       - name: "Acknowledge request"
         env:
           GITHUB_TOKEN: "${{ steps.mint_identity_token.outputs.token || secrets.GITHUB_TOKEN || github.token }}"
@@ -139,8 +130,6 @@ jobs:
     needs:
       - "dispatch"
       - "review"
-      - "triage"
-      - "invoke"
     if: |-
       ${{ always() && !cancelled() && (failure() || needs.dispatch.outputs.command == 'fallthrough') }}
     runs-on: "ubuntu-latest"
