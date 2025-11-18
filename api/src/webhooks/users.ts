@@ -4,6 +4,22 @@ import { Webhook } from "svix";
 
 const prisma = new PrismaClient();
 
+// Define types for Clerk webhook events
+interface ClerkEmailAddress {
+  email_address: string;
+}
+
+interface ClerkUser {
+  id: string;
+  email_addresses: ClerkEmailAddress[];
+  firstName?: string;
+}
+
+interface ClerkWebhookEvent {
+  data: ClerkUser;
+  type: string;
+}
+
 const userClerkWebHook = async (req: Request, res: Response) => {
   try {
     const payloadString = JSON.stringify(req.body);
@@ -14,7 +30,7 @@ const userClerkWebHook = async (req: Request, res: Response) => {
     };
 
     const wh = new Webhook(process.env.CLERK_WEBHOOK_SECRET!);
-    const evt = wh.verify(payloadString, svixHeaders);
+    const evt = wh.verify(payloadString, svixHeaders) as ClerkWebhookEvent;
     console.log("here works 3");
     const { id, ...attributes } = evt.data;
     const eventType = evt.type;
