@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 const userClerkWebHook = async (req: Request, res: Response) => {
   try {
     const payloadString = JSON.stringify(req.body);
-    const svixHeaders = req.headers;
+    const svixHeaders = req.headers as Record<string, string>;
 
     const wh = new Webhook(process.env.CLERK_WEBHOOK_SECRET!);
     const evt = wh.verify(payloadString, svixHeaders);
