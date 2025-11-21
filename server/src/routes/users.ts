@@ -44,7 +44,7 @@ app.get("/:id", async (c) => {
       message: "User found",
       status: "success",
     },
-    200,
+    500,
   );
 });
 
