@@ -9,7 +9,7 @@ app.route("/users", users);
 
 const server = Bun.serve({
   port: 3001,
-  fetch: app.fetch,
+  fetch:
 });
 
 console.log(`Server running on http://localhost:${server.port}`);
