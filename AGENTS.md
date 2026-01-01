@@ -7,11 +7,6 @@
 - `npm run build` - Build for production
 - `npm run lint` - Run ESLint
 
-### API (Express + Prisma)
-- `npm test` - Run Jest tests
-- `npm start` - Start server with nodemon
-- Run single test: `npm test -- <test-file>` or `npm test -- --testNamePattern="<pattern>"`
-
 ### Server (Hono + Drizzle)
 - `bun run dev` - Start development server
 - `bun run migration` - Generate database migrations
@@ -32,7 +27,6 @@
 - Follow shadcn/ui patterns for UI components
 
 ### Backend
-- **API (Express)**: Async/await with try/catch, Prisma ORM, return JSON responses
 - **Server (Hono)**: Zod validation, Drizzle ORM, Hono context (`c`) for requests/responses
 
 ### Testing
