@@ -2,11 +2,6 @@
 
 ## Build/Lint/Test Commands
 
-### Client (Next.js)
-- `npm run dev` - Start development server with Turbopack
-- `npm run build` - Build for production
-- `npm run lint` - Run ESLint
-
 ### Server (Hono + Drizzle)
 - `bun run dev` - Start development server
 - `bun run migration` - Generate database migrations
@@ -18,13 +13,6 @@
 - Strict mode enabled
 - Use explicit type annotations
 - Prefer interfaces over types for object shapes
-
-### Frontend (React/Next.js)
-- Import React as `import * as React from "react"`
-- Use `@/` path aliases for imports
-- Use `class-variance-authority` for component variants
-- Use `cn()` utility for conditional classes
-- Follow shadcn/ui patterns for UI components
 
 ### Backend
 - **Server (Hono)**: Zod validation, Drizzle ORM, Hono context (`c`) for requests/responses

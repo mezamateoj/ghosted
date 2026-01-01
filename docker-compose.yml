@@ -1,34 +1,15 @@
 services:
-    api:
-        build:
-            context: ./api
-            dockerfile: Dockerfile
-        image: mezamateoj/ghosted-api
-        container_name: api
-        ports:
-            - 8000:8000
-        volumes:
-            - ./api:/app
-            - /app/node_modules
-        env_file:
-        - ./api/.env
-        restart: always
-
-    client:
-        build:
-            context: ./client
-            dockerfile: Dockerfile
-        image: mezamateoj/ghosted-client
-        container_name: client
-
-        volumes:
-        - ./client/src:/app/src
-        - ./client/public:/app/public
-        env_file:
-        - ./client/.env.local
-        restart: always
-        ports:
-        - 3000:3000
-
-
-    
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: mezamateoj/ghosted-server
+    container_name: server
+    ports:
+      - 8000:8000
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    env_file:
+      - ./server/.env
+    restart: always
