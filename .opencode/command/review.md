@@ -1,6 +1,6 @@
 ---
 description: Review Code
-agent: Plan
+agent: plan
 model: anthropic/claude-sonnet-4-5
 ---
 
