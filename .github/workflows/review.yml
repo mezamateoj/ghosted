@@ -1,4 +1,4 @@
-name: opencode
+name: review
 
 on:
   pull_request_review_comment:
@@ -19,13 +19,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
-      - name: Run opencode
-        uses: anomalyco/opencode/github@latest
+      - name: Install opencode
+        run: curl -fsSL https://opencode.ai/install | bash
+
+      - name: Review Code
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        with:
-          model: anthropic/claude-sonnet-4-6
-          share: true
         run: |
           opencode run --command review
