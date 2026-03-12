@@ -1,7 +1,5 @@
 ---
 description: Review Code
-agent: plan
-model: anthropic/claude-sonnet-4-5
 ---
 
 # Code Review
